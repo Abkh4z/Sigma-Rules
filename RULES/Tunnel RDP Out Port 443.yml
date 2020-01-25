@@ -1,0 +1,21 @@
+title: Tunnel RDP Out Port 443
+description: Using RDP To Access Servers Over 443
+author: Emir Erdoğan
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    ParentImage:
+    - C:\Windows\System32\cmd.exe
+    Image:
+    - C:\Windows\System32\reg.exe
+    CommandLine:
+    - reg  add "HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer\WinStations\RDP-Tcp"
+      /v PortNumber /t  REG_DWORD /d 443 /f
+  condition: selection
+tags:
+- attack.T1076
+falsepositives:
+- unknown
+level: high
