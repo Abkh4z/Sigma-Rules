@@ -1,0 +1,51 @@
+title: SANS Poster-Known Abnormal...Find Evil - Sysmon Behaviour
+description: SANS-Known Abnormal Parent Child Processed.. Find Evil
+reference: https://digital-forensics.sans.org/media/dfir_poster_2014.pdf
+date: 2019/10/29
+tags:
+- attack.T1502
+status: experimental
+author: Emir Erdogan
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection1:
+    EventID: 1
+    Image:
+    - '*\winlogon.exe'
+    - '*\wininit.exe'
+    - '*\csrss.exe'
+    ParentImage!:
+    - '*\smss.exe'
+  selection2:
+    EventID: 1
+    Image:
+    - '*\tashost.exe'
+    - '*\svchost.exe'
+    ParentImage!:
+    - '*\services.exe'
+  selection3:
+    EventID: 1
+    Image:
+    - '*\lsass.exe'
+    - '*\lsm.exe'
+    - '*\services.exe'
+    ParentImage!:
+    - '*\wininit.exe'
+  selection4:
+    EventID: 1
+    Image:
+    - '*\iexplore.exe'
+    ParentImage!:
+    - '*\explorer.exe'
+  selection5:
+    EventID: 1
+    Image:
+    - '*\explorer.exe'
+    ParentImage!:
+    - '*\userinit.exe'
+  condition: 1 of them
+falsepositives:
+- unknown
+level: high
