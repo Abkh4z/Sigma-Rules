@@ -15,9 +15,7 @@ Process creation events
 
 Logs are usually kept in a security information and event management system (SIEM). To search in your SIEM or log source, Sigma offers to convert your rule into a search query specific to your SIEM product (the target):
 
-
-
-<img>
+![Image of Sigma](https://1.bp.blogspot.com/-bMnJITlj6ew/Wp7przGlR-I/AAAAAAAAKdA/tVVOzbNY310X3PjxsSmt4c7u498O_4eWACLcBGAs/s1600/sigma_4_Sigma-description.png)
 
 Currently, Sigma rules can be converted to the following targets:
 
