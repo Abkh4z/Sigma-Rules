@@ -1,0 +1,35 @@
+title: Snatch Ransomware (Sysmon Behaviour)
+description: Snatch ransomware reboots PCs into Safe Mode to bypass protection
+reference: https://news.sophos.com/en-us/2019/12/09/snatch-ransomware-reboots-pcs-into-safe-mode-to-bypass-protection/
+date: 2019/12/10
+tags:
+- attack.T1486
+- attack.T1022
+- attack.T1313
+status: experimental
+author: Emir Erdogan
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection1:
+    CommandLine:
+    - net stop SuperBackupMan
+    - vssadmin delete shadows /all /quiet
+    - sc  start SuperBackupMan
+    - bcdedit.exe /set {current} safeboot minimal
+    - shutdown /r /f /t 00
+  selection2:
+    Event ID: 11
+    TargetFilename:
+    - '*.snatch*'
+    - '*.jimm*'
+    - '*.googl*'
+    - '*.dglnl*'
+    - '*.ohwqg*'
+    - '*.wvtr0*'
+    - '*.hceem*'
+  condition: selection1 or selection2
+falsepositives:
+- unknown
+level: high
