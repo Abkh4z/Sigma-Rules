@@ -1,4 +1,4 @@
-# Sigma-Rules
+# Sigma
 Generic rule format for SIEM Solutions
 Sigma is a generic and open signature format to detect malware and other security-related events in log files. Which are the log files currently supported? 
 
