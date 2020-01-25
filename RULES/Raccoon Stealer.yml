@@ -1,0 +1,38 @@
+title: Fallout Rig EK Delivers Raccoon Stealer
+description: Raccoon Stealer
+reference: https://broadanalysis.com/2019/11/18/fallout-exploit-kit-delivers-raccoon-stealer/
+date: 2019/11/24
+tags:
+- attack.T1140
+- attack.T1059
+- attack.T1005
+- attack.T1022
+- attack.T1105
+- attack.T1057
+status: experimental
+author: Emir Erdogan
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection1:
+    Image:
+    - '*\cvtres.exe'
+    ParentImage:
+    - '*\csc.exe'
+  selection2:
+    EventID: 1
+    Image:
+    - '*\csc.exe'
+    - '*\AyJWa1N0.tmp'
+    ParentImage:
+    - '*\powershell.exe'
+  selection3:
+    Image:
+    - '*\cmd.exe'
+    ParentImage:
+    - '*\AyJWa1N0.tmp'
+  condition: selection1 or selection2 or selection3
+falsepositives:
+- unknown
+level: high
